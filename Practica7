@@ -1,34 +1,42 @@
 pipeline {
-  agent any
-   stages {
-     stage('Checkout') {
-        steps {
-            git 'https://github.com/Nery-yiyi.git'
+    agent any  // Utiliza cualquier agente disponible
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clona el repositorio desde GitHub
+                git 'https://github.com/Nery-yiyi.git'
+            }
         }
-     }
-      stage('Install Dependencies') {
-           steps {
-               script {
-                   echo 'Installing dependencies...'
-                   sh 'npm install'
-               }
-           }
-       }
-       stage('Run Tests') {
-           steps {
-               script {
-                   echo 'Running tests...'
-                   sh 'npm test'
-               }
-             }
-         }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    echo 'Installing dependencies...'
+                    // Instala las dependencias usando npm
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    // Ejecuta los tests definidos en el proyecto
+                    sh 'npm test'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
-               script {
-                   echo 'Building the application...'
-                   // Agregar cualquier paso de construcción necesario
-               }
-           }
-       }
-   }
+                script {
+                    echo 'Building the application...'
+                    // Agregar cualquier paso de construcción necesario
+                    // Por ejemplo: sh 'npm run build'
+                }
+            }
+        }
+    }
 }
